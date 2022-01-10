@@ -6,6 +6,10 @@ namespace MoodAnalyzerApp
     {
         private string message;
 
+        public MoodAnalyse3()
+        {
+            this.message = null;
+        }
         /// <summary>
         /// Parameterised Constructor
         /// </summary>
