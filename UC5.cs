@@ -53,13 +53,35 @@ namespace MoodAnalyzerApp
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_VALUE, "method not found");
             }
-        }
 
+            /// <summary>
+            /// UC7 : Use Reflection to change mood dynamically
+            /// </summary>
+            public static string Setfield(string message, string fieldName)
+            {
+                try
+                {
+                    MoodAnalyse3 moodAnalyse = new MoodAnalyse3();
+                    Type type = typeof(MoodAnalyse3);
+                    FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                    if (message == null)
+                    {
+                        throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_MESSAGE, "Message should not be null");
+                    }
+                    field.SetValue(moodAnalyse, message);
+                    return moodAnalyse.message;
+                }
+
+                catch (NullReferenceException)
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "Field not Found");
+                }
+            }
+        }
     }
 }
 
 
 
-        }
-    }
-}
+            
+    
