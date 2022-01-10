@@ -2,25 +2,45 @@
 
 namespace MoodAnalyzerApp
 {
-    public class MoodAnalysisException : Exception
+    public class MoodAnalyse3
     {
-        /// <summary>
-        /// MoodAnalysisException Class for Handling Exception.
-        /// </summary>
-        public enum ExceptionType
+        internal string message;
+
+        public MoodAnalyse3()
         {
-            NULL_MESSAGE, EMPTY_MESSAGE,
-            NO_SUCH_FIELD, NO_SUCH_METHOD,
-            NO_SUCH_CLASS, OBJECT_CREATION_ISSUE,
-            NULL_VALUE
+            this.message = null;
+        }
+        /// <summary>
+        /// Parameterised Constructor
+        /// </summary>
+        /// <param name="message"></param>
+        public MoodAnalyse3(string message)
+        {
+            this.message = message;
         }
 
-        // Creating 'type' variable of type ExceptionType
-        private readonly ExceptionType type;
-
-        public MoodAnalysisException(ExceptionType Type, string message) : base(message)
+        public string AnalyseMood()
         {
-            this.type = Type;
+            try
+            {
+                if (this.message.Equals(string.Empty))
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_MESSAGE, "Mood should not be Empty");
+                }
+
+                if (this.message.Contains("Sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_MESSAGE, "Mood should not be null");
+            }
         }
     }
 }
