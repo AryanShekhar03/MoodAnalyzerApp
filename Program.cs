@@ -2,11 +2,13 @@
 
 namespace MoodAnalyzerApp
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // UC1
+            MoodAnalyse obj = new MoodAnalyse("Sad");
+            obj.AnalyseMood();
         }
     }
 }
