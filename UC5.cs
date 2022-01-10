@@ -34,6 +34,30 @@ namespace MoodAnalyzerApp
             }
         }
 
+        /// <summary>
+        /// UC6 : Use Reflection to invoke Method – analyseMood
+        /// </summary>
+        public static string InvokeAnalyseMood(string message, string methodName)
+        {
+            try
+            {
+                Type type = typeof(MoodAnalyse3);
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse3",
+                    "MoodAnalyse3", message);
+                object info = methodInfo.Invoke(moodAnalyserObject, null);
+                return info.ToString();
+            }
+
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_VALUE, "method not found");
+            }
+        }
+
+    }
+}
+
 
 
         }
